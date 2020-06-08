@@ -1,5 +1,14 @@
 
 
+window.addEventListener("load",function(){
+    document.querySelector(".preloader").classList.add("opacity-0");
+    setTimeout(function(){
+            document.querySelector(".preloader").style.display = "none";
+    },2000)
+})
+
+
+
 // Aside Navbar
 
 const nav =  document.querySelector(".nav"),
@@ -25,6 +34,10 @@ for(let i=0; i<totalNavList; i++){
         }
         this.classList.add("active");
         showSection(this);  
+
+        if(window.innerWidth < 1200){
+            asideSectionToggleBtn();
+        }
     })
 }
 
