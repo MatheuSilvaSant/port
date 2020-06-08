@@ -20,7 +20,8 @@ const nav =  document.querySelector(".nav"),
 for(let i=0; i<totalNavList; i++){
     const a = navList[i].querySelector("a");
     a.addEventListener("click", function(){
-    //nadas
+    
+            removeBackSectionClass();
 
         for(let i=0; i<totalSection; i++){
             allSection[i].classList.remove("back-section");
@@ -28,7 +29,9 @@ for(let i=0; i<totalNavList; i++){
 
         for(let j=0; j<totalNavList; j++){
             if(navList[j].querySelector("a").classList.contains("active")){
-                allSection[j].classList.add("back-section");
+
+                addBackSectionClass(j);
+               // allSection[j].classList.add("back-section");
             }
             navList[j].querySelector("a").classList.remove("active");
         }
@@ -52,6 +55,40 @@ function showSection(element){
 
         document.querySelector("#"+target).classList.add("active")
 }
+
+function addBackSectionClass(num){
+    allSection[num].classList.add("back-section");
+}
+
+function removeBackSectionClass(){
+    for(let i=0; i<totalSection; i++){
+        allSection[i].classList.remove("back-section");
+    }
+}
+
+
+function updateNav(element){
+
+    for(i=0; i<totalNavList; i++){
+        navList[i].querySelector("a").classList.remove("active");
+        const target = element.getAttribute("href").split("#")[1];
+            if(target === navList[i].querySelector("a").getAttribute("href").split("#")[1]){
+                navList[i].querySelector("a").classList.add("active");
+            }
+    }
+}
+
+
+document.querySelector(".hire-me").addEventListener("click",function(){
+    //console.log(this);
+    const sectionIndex =  this.getAttribute("data-section-index");
+    // console.log(sectionIndex);
+    showSection(this);
+    updateNav(this);
+    // removeBackSectionClass();
+    // addBackSectionClass(sectionIndex);
+})
+
 
 
 const navTogglerBtn =  document.querySelector(".nav-toggler"),
